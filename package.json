@@ -1,0 +1,20 @@
+{
+  "name": "ideal-grant-bot-node",
+  "version": "1.0.0",
+  "description": "IDEAL GRANT 2026 ro'yxat boti",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning bot.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "google-auth-library": "^11.3.1",
+    "google-spreadsheet": "^5.3.0",
+    "grammy": "^1.46.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  }
+}
