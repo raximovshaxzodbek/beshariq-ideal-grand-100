@@ -58,6 +58,7 @@ Har bir reklama kanali uchun alohida havola bering:
 6. Jadval havolasidan ID ni oling: `docs.google.com/spreadsheets/d/<ID>/edit`.
 
 Bot birinchi arizada "Arizalar" varag'ini va sarlavhalarni o'zi yaratadi.
+`GOOGLE_CREDENTIALS_FILE` nisbiy yo'l bo'lsa, loyiha papkasidan qidiriladi; mutlaq yo'l ham berish mumkin.
 
 ### 3. Server (Ubuntu VPS, eng arzon tarif yetadi: 1 CPU, 1 GB RAM)
 ```bash

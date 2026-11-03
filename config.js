@@ -1,5 +1,9 @@
 // Bot sozlamalari. Hammasi .env faylidan o'qiladi.
 import "dotenv/config";
+import { dirname, isAbsolute, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projectDir = dirname(fileURLToPath(import.meta.url));
 
 function required(name) {
   const value = (process.env[name] || "").trim();
@@ -15,7 +19,10 @@ export const ADMIN_IDS = new Set(
 );
 
 export const GOOGLE_SHEET_ID = required("GOOGLE_SHEET_ID");
-export const GOOGLE_CREDENTIALS_FILE = process.env.GOOGLE_CREDENTIALS_FILE || "credentials.json";
+const credentialsFile = process.env.GOOGLE_CREDENTIALS_FILE || "credentials.json";
+export const GOOGLE_CREDENTIALS_FILE = isAbsolute(credentialsFile)
+  ? credentialsFile
+  : resolve(projectDir, credentialsFile);
 export const GOOGLE_WORKSHEET = process.env.GOOGLE_WORKSHEET || "Arizalar";
 
 export const DB_PATH = process.env.DB_PATH || "bot.db";
