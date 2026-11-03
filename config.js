@@ -32,8 +32,8 @@ export const DB_PATH = process.env.DB_PATH || "bot.db";
 export const TZ_OFFSET_HOURS = Number(process.env.TZ_OFFSET_HOURS || 5);
 
 // Kampaniya sanalari (YYYY-MM-DD)
-export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-28";
-export const TEST_DATE = process.env.TEST_DATE || "2026-11-29";
+export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-29";
+export const TEST_DATE = process.env.TEST_DATE || "2026-11-28";
 
 // Sinflar bo'yicha test vaqti
 export function testTimeForGrade(grade) {
@@ -56,7 +56,7 @@ export const SCHOOL_LON = process.env.SCHOOL_LON ? Number(process.env.SCHOOL_LON
 
 // ---------- Vaqt bilan ishlash ----------
 
-// Hozirgi Toshkent vaqti: "2026-11-25 18:05:00"
+// Hozirgi Toshkent vaqti: "2026-11-29 18:05:00"
 export function nowLocal() {
   return new Date(Date.now() + TZ_OFFSET_HOURS * 3600e3).toISOString().replace("T", " ").slice(0, 19);
 }

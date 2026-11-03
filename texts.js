@@ -119,7 +119,7 @@ export const REMINDER_TEXTS = {
     `Farzandingizni hoziroq yozdiring — bir daqiqa vaqt oladi. «${BTN_REGISTER}» 👇`,
   deadline_0:
     "🔔 <b>Bugun ro'yxatning oxirgi kuni!</b>\n\n" +
-    `Ertaga, ${T}, grant testi bo'ladi. Ulgurib qoling: «${BTN_REGISTER}» 👇`,
+    `Ro'yxatdan o'tish bugun yakunlanadi. Ulgurib qoling: «${BTN_REGISTER}» 👇`,
   test_eve:
     "🔔 <b>Ertaga grant testi!</b>\n\n{children}\n\n" +
     `📍 ${config.SCHOOL_ADDRESS}\n🧭 Mo'ljal: ${config.SCHOOL_LANDMARK}\n\n` +
