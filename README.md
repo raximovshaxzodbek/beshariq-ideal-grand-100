@@ -60,6 +60,14 @@ Har bir reklama kanali uchun alohida havola bering:
 Bot birinchi arizada "Arizalar" varag'ini va sarlavhalarni o'zi yaratadi.
 `GOOGLE_CREDENTIALS_FILE` nisbiy yo'l bo'lsa, loyiha papkasidan qidiriladi; mutlaq yo'l ham berish mumkin.
 
+### Railway'da Google credentials sozlash
+`credentials.json` faylini GitHub'ga yuklamang. Railway loyihasidagi bot service'ni oching → **Variables** → **New Variable**:
+
+- **Name:** `GOOGLE_CREDENTIALS_JSON`
+- **Value:** `credentials.json` faylining to'liq JSON mazmuni
+
+Saqlang va Railway'da o'zgarishlarni deploy qiling. Bu variable berilgan bo'lsa, u `GOOGLE_CREDENTIALS_FILE` fayl yo'lidan ustun turadi. Google service account emailiga jadvalda **Editor** ruxsati berilgan bo'lishi, `GOOGLE_SHEET_ID` esa to'g'ri bo'lishi kerak.
+
 ### 3. Server (Ubuntu VPS, eng arzon tarif yetadi: 1 CPU, 1 GB RAM)
 ```bash
 # Node.js 22 o'rnatish

@@ -19,6 +19,7 @@ export const ADMIN_IDS = new Set(
 );
 
 export const GOOGLE_SHEET_ID = required("GOOGLE_SHEET_ID");
+export const GOOGLE_CREDENTIALS_JSON = process.env.GOOGLE_CREDENTIALS_JSON || "";
 const credentialsFile = process.env.GOOGLE_CREDENTIALS_FILE || "credentials.json";
 export const GOOGLE_CREDENTIALS_FILE = isAbsolute(credentialsFile)
   ? credentialsFile
@@ -31,8 +32,8 @@ export const DB_PATH = process.env.DB_PATH || "bot.db";
 export const TZ_OFFSET_HOURS = Number(process.env.TZ_OFFSET_HOURS || 5);
 
 // Kampaniya sanalari (YYYY-MM-DD)
-export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-25";
-export const TEST_DATE = process.env.TEST_DATE || "2026-11-26";
+export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-28";
+export const TEST_DATE = process.env.TEST_DATE || "2026-11-29";
 
 // Sinflar bo'yicha test vaqti
 export function testTimeForGrade(grade) {

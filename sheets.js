@@ -16,7 +16,9 @@ let syncing = false;
 
 async function getSheet() {
   if (sheet) return sheet;
-  const creds = JSON.parse(fs.readFileSync(config.GOOGLE_CREDENTIALS_FILE, "utf8"));
+  const creds = config.GOOGLE_CREDENTIALS_JSON
+    ? JSON.parse(config.GOOGLE_CREDENTIALS_JSON)
+    : JSON.parse(fs.readFileSync(config.GOOGLE_CREDENTIALS_FILE, "utf8"));
   const auth = new JWT({
     email: creds.client_email,
     key: creds.private_key,
