@@ -7,9 +7,9 @@ import * as T from "./texts.js";
 
 const DIRECTIONS = {
   tabiiy: "Tabiiy (kimyo, biologiya)",
-  aniq: "Aniq (matematika, fizika)",
-  ijtimoiy: "Ijtimoiy (tarix, huquq)",
-  xorijiy: "Xorijiy (ingliz tili, ona tili)",
+  aniq: "Aniq (matematika, ingliz tili/fizika)",
+  ijtimoiy: "Ijtimoiy (tarix/huquq, ingliz tili)",
+  xorijiy: "Xorijiy (ingliz tili, ona tili/rus tili)",
 };
 const LANGS = { uz: "O'zbek sinfi", ru: "Rus sinfi" };
 const DORMS = { yes: "Ha, kerak", no: "Yo'q", maybe: "Hali bilmayman" };
