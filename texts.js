@@ -61,19 +61,24 @@ export const REGISTRATION_CLOSED =
   config.SCHOOL_PHONES.join("\n");
 
 // --- Ro'yxatdan o'tish savollari ---
-export const Q_PARENT = "1/8. Ismingiz va familiyangizni yozing (ota-ona):";
+export const Q_PARENT = "1/9. Ismingiz va familiyangizni yozing (ota-ona):";
 export const Q_PHONE =
-  "2/8. Telefon raqamingizni yuboring.\n" +
+  "2/9. Telefon raqamingizni yuboring.\n" +
   `«${BTN_SEND_PHONE}» tugmasini bosing yoki raqamni yozing (masalan: 90 123 45 67).`;
-export const Q_CHILD = "3/8. Farzandingizning ismi va familiyasi:";
-export const Q_GRADE = "4/8. Farzandingiz qaysi sinfga o'qishga kiradi?";
-export const Q_DIRECTION = "5/8. Qaysi yo'nalishda o'qimoqchi?";
-export const Q_LANG = "6/8. Qaysi tilda o'qiydi?";
-export const Q_DORM = "7/8. Yotoqxona kerakmi?";
-export const Q_HEARD = "8/8. Biz haqimizda qayerdan eshitdingiz?";
+export const Q_CHILD = "3/9. Farzandingizning ismi va familiyasi:";
+export const Q_SCHOOL = "4/9. Farzandingiz qaysi maktabda tahsil oladi?";
+export const Q_OTHER_SCHOOL = "Farzandingiz tahsil olayotgan maktab nomini kiriting:";
+export const SCHOOL_NOT_ELIGIBLE =
+  "Afsuski, Ideal School o'quvchilari grant testida ishtirok eta olmaydi. Ro'yxatdan o'tish yakunlandi.";
+export const Q_GRADE = "5/9. Farzandingiz qaysi sinfga o'qishga kiradi?";
+export const Q_DIRECTION = "6/9. Qaysi yo'nalishda o'qimoqchi?";
+export const Q_LANG = "7/9. Qaysi tilda o'qiydi?";
+export const Q_DORM = "8/9. Yotoqxona kerakmi?";
+export const Q_HEARD = "9/9. Biz haqimizda qayerdan eshitdingiz?";
 
 export const ERR_NAME = "Iltimos, ismni to'g'ri yozing (2–60 ta harf).";
 export const ERR_PHONE = "Raqam noto'g'ri. Masalan: 90 123 45 67 yoki +998 90 123 45 67";
+export const ERR_SCHOOL = "Iltimos, maktab nomini kiriting (2–60 ta belgi).";
 export const ERR_BUTTON = "Iltimos, pastdagi tugmalardan birini tanlang 👇";
 
 export function confirm(d) {
@@ -82,6 +87,7 @@ export function confirm(d) {
     `👤 Ota-ona: <b>${d.parentName}</b>\n` +
     `📱 Telefon: <b>${d.phone}</b>\n` +
     `🧒 Farzand: <b>${d.childName}</b>\n` +
+    `🏫 Maktab: <b>${d.currentSchool}</b>\n` +
     `🏫 Sinf: <b>${d.grade}-sinf</b>` +
     (d.direction ? `\n🧭 Yo'nalish: <b>${d.direction}</b>` : "") + "\n" +
     `🗣 Sinf tili: <b>${d.classLang}</b>\n` +

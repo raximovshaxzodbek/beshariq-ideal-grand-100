@@ -8,7 +8,7 @@ import * as db from "./db.js";
 export const HEADER = [
   "№", "Sana", "Ota-ona ismi", "Telefon", "Farzand ismi", "Sinf", "Yo'nalish",
   "Sinf tili", "Yotoqxona", "Qayerdan eshitgan", "Test vaqti",
-  "Telegram", "Telegram ID", "Holat", "Izoh",
+  "Telegram", "Telegram ID", "Holat", "Izoh", "Maktabi",
 ];
 
 let sheet = null;
@@ -33,6 +33,9 @@ async function getSheet() {
   } else {
     try {
       await ws.loadHeaderRow();
+      if (!ws.headerValues.includes("Maktabi")) {
+        await ws.setHeaderRow([...ws.headerValues, "Maktabi"]);
+      }
     } catch {
       await ws.setHeaderRow(HEADER);
     }
@@ -46,7 +49,7 @@ export function toRow(r) {
     r.id, r.created_at, r.parent_name, r.phone, r.child_name, `${r.grade}-sinf`,
     r.direction || "", r.class_lang, r.dormitory, r.heard_from,
     `${config.TEST_DATE.split("-").reverse().join(".")} ${r.test_time}`,
-    r.username ? `@${r.username}` : "", String(r.user_id), "Yangi", "",
+    r.username ? `@${r.username}` : "", String(r.user_id), "Yangi", "", r.current_school,
   ];
 }
 

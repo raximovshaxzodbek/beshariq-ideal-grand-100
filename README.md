@@ -5,7 +5,7 @@ Beshariq Ideal School grant testi uchun Telegram bot. Node.js 22.13 yoki undan y
 ## Bot nima qiladi
 
 **Ota-onalar uchun**
-- 8 ta savol orqali farzandni grant testiga yozadi: ota-ona ismi, telefon, farzand ismi, sinf (1–10), yo'nalish (faqat 8–10-sinf), sinf tili, yotoqxona, qayerdan eshitgan.
+- 9 ta savol orqali farzandni grant testiga yozadi: ota-ona ismi, telefon, farzand ismi, tahsil olayotgan maktab, sinf (1–10), yo'nalish (faqat 8–10-sinf), sinf tili, yotoqxona, qayerdan eshitgan. Ideal School o'quvchilari grant testiga ro'yxatdan o'tolmaydi; boshqa maktab o'quvchilaridan maktab nomi so'raladi.
 - Bitta ota-ona bir nechta farzandini yozishi mumkin (ismi va telefoni qayta so'ralmaydi).
 - Har bir farzandga sinfiga qarab test vaqtini aytadi: 1–4-sinf 09:00, 5–7-sinf 11:30, 8–10-sinf 14:00.
 - Menyu: Grant haqida, Manzil, Aloqa, Mening arizalarim.

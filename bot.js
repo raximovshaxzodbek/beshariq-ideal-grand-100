@@ -13,6 +13,7 @@ const DIRECTIONS = {
 };
 const LANGS = { uz: "O'zbek sinfi", ru: "Rus sinfi" };
 const DORMS = { yes: "Ha, kerak", no: "Yo'q", maybe: "Hali bilmayman" };
+const SCHOOLS = { ideal: "Ideal School", other: "Boshqa maktab" };
 const HEARD = {
   instagram: "Instagram", telegram: "Telegram", flayer: "Flayer",
   banner: "Banner", friends: "Tanishlardan", other: "Boshqa",
@@ -203,6 +204,14 @@ bot.on("message", async (ctx, next) => {
     const name = validName(text);
     if (!name) return ctx.reply(T.ERR_NAME);
     data.childName = name;
+    ctx.session.step = "school";
+    return ctx.reply(T.Q_SCHOOL, { reply_markup: inline("school", SCHOOLS, 2) });
+  }
+
+  if (step === "other_school") {
+    const school = validName(text);
+    if (!school) return ctx.reply(T.ERR_SCHOOL);
+    data.currentSchool = school;
     ctx.session.step = "grade";
     return ctx.reply(T.Q_GRADE, { reply_markup: gradeKb() });
   }
@@ -219,7 +228,7 @@ bot.on("message", async (ctx, next) => {
   }
 
   // Tugma kutilayotgan paytda matn yozilsa
-  if (["grade", "direction", "class_lang", "dormitory", "heard_from", "confirm"].includes(step)) {
+  if (["school", "grade", "direction", "class_lang", "dormitory", "heard_from", "confirm"].includes(step)) {
     return ctx.reply(T.ERR_BUTTON);
   }
   return next();
@@ -250,6 +259,18 @@ bot.on("callback_query:data", async (ctx) => {
     return ctx.reply(T.Q_LANG, { reply_markup: inline("lang", LANGS, 2) });
   }
 
+  if (prefix === "school" && step === "school") {
+    const answer = SCHOOLS[value];
+    if (!answer) return;
+    await mark(T.Q_SCHOOL, answer);
+    if (value === "ideal") {
+      ctx.session = { step: null, data: {} };
+      return ctx.reply(T.SCHOOL_NOT_ELIGIBLE, { reply_markup: mainMenu() });
+    }
+    ctx.session.step = "other_school";
+    return ctx.reply(T.Q_OTHER_SCHOOL, { reply_markup: cancelKb() });
+  }
+
   if (prefix === "dir" && step === "direction" && DIRECTIONS[value]) {
     await mark(T.Q_DIRECTION, DIRECTIONS[value]);
     data.direction = DIRECTIONS[value];
@@ -276,7 +297,12 @@ bot.on("callback_query:data", async (ctx) => {
     data.heardFrom = HEARD[value];
     ctx.session.step = "confirm";
     return ctx.reply(
-      T.confirm({ ...data, parentName: esc(data.parentName), childName: esc(data.childName) }),
+      T.confirm({
+        ...data,
+        parentName: esc(data.parentName),
+        childName: esc(data.childName),
+        currentSchool: esc(data.currentSchool),
+      }),
       { reply_markup: inline("confirm", { yes: "✅ Tasdiqlash", edit: "✏️ Qaytadan to'ldirish" }) }
     );
   }

@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS registrations (
   parent_name  TEXT NOT NULL,
   phone        TEXT NOT NULL,
   child_name   TEXT NOT NULL,
+  current_school TEXT NOT NULL DEFAULT '',
   grade        INTEGER NOT NULL,
   direction    TEXT,
   class_lang   TEXT NOT NULL,
@@ -34,6 +35,11 @@ CREATE TABLE IF NOT EXISTS reminders_sent (
   PRIMARY KEY (key, user_id)
 );
 `);
+
+const registrationColumns = db.prepare("PRAGMA table_info(registrations)").all();
+if (!registrationColumns.some((column) => column.name === "current_school")) {
+  db.exec("ALTER TABLE registrations ADD COLUMN current_school TEXT NOT NULL DEFAULT ''");
+}
 
 export function addUser(userId, username, fullName, source) {
   db.prepare(
@@ -51,10 +57,10 @@ export function setBlocked(userId) {
 export function addRegistration(userId, d) {
   return db.prepare(
     `INSERT INTO registrations
-     (user_id, parent_name, phone, child_name, grade, direction,
+     (user_id, parent_name, phone, child_name, current_school, grade, direction,
       class_lang, dormitory, heard_from, test_time, created_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ).run(userId, d.parentName, d.phone, d.childName, d.grade, d.direction ?? null,
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+  ).run(userId, d.parentName, d.phone, d.childName, d.currentSchool, d.grade, d.direction ?? null,
     d.classLang, d.dormitory, d.heardFrom, d.testTime, config.nowLocal()).lastInsertRowid;
 }
 
