@@ -53,6 +53,41 @@ export function toRow(r) {
   ];
 }
 
+export async function usersFromSheet() {
+  const ws = await getSheet();
+  await ws.loadHeaderRow();
+  if (!ws.headerValues.includes("Telegram ID")) {
+    throw new Error('Google Sheets jadvalida "Telegram ID" ustuni topilmadi.');
+  }
+
+  const rows = await ws.getRows();
+  const users = new Map();
+  let invalidRows = 0;
+  for (const row of rows) {
+    const rawId = row.get("Telegram ID");
+    if (rawId === undefined || rawId === null || String(rawId).trim() === "") continue;
+    const value = String(rawId).trim();
+    if (!/^\d+$/.test(value)) {
+      invalidRows++;
+      continue;
+    }
+    const userId = Number(value);
+    if (!Number.isSafeInteger(userId) || userId <= 0) {
+      invalidRows++;
+      continue;
+    }
+    const previous = users.get(userId);
+    const username = String(row.get("Telegram") ?? "").trim().replace(/^@/, "");
+    const fullName = String(row.get("Ota-ona ismi") ?? "").trim();
+    users.set(userId, {
+      userId,
+      username: username || previous?.username || null,
+      fullName: fullName || previous?.fullName || null,
+    });
+  }
+  return { users: [...users.values()], invalidRows, rows: rows.length };
+}
+
 // Hali jadvalga tushmagan arizalarni yozadi. Nechtasi yozilganini qaytaradi.
 export async function syncPending() {
   if (syncing) return 0;

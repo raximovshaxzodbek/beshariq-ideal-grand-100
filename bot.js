@@ -144,6 +144,25 @@ bot.command("sync", async (ctx) => {
   await ctx.reply(`Google Sheets'ga yozildi: ${n} ta ariza.`);
 });
 
+bot.command("restore_users", async (ctx) => {
+  if (!isAdmin(ctx.from.id)) return;
+  try {
+    const imported = await sheets.usersFromSheet();
+    const result = db.restoreUsers(imported.users);
+    const available = db.audience("all").length;
+    await ctx.reply(
+      `✅ Google Sheets'dan ${imported.users.length} ta noyob Telegram ID olindi.\n` +
+      `Yangi qo'shildi: ${result.added}; bazada avvaldan bor: ${result.alreadyPresent}.\n` +
+      `Hozir xabar yuborish mumkin: ${available} ta.` +
+      (imported.invalidRows ? `\nID noto'g'ri bo'lgan qatorlar: ${imported.invalidRows}.` : "") +
+      `\n\nTarqatish uchun /post → “Hammaga (start bosganlar)” ni tanlang.`
+    );
+  } catch (e) {
+    console.error("Google Sheets'dan foydalanuvchilarni tiklab bo'lmadi:", e);
+    await ctx.reply("❌ Tiklash amalga oshmadi. Google Sheets ruxsati va “Telegram ID” ustunini tekshiring.");
+  }
+});
+
 bot.command("post", async (ctx) => {
   if (!isAdmin(ctx.from.id)) return;
   ctx.session = { step: "post_audience", data: {} };

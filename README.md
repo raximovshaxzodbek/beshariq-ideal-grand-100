@@ -28,6 +28,7 @@ Har bir eslatma bir kishiga faqat bir marta boradi, bot qayta ishga tushsa ham.
 - `/post` — post tarqatish. Kimga yuborishni tanlaysiz (hammaga / ro'yxatdan o'tganlarga / o'tmaganlarga), postni yuborasiz (matn, rasm yoki video izohi bilan), bot ko'rinishini ko'rsatadi, tasdiqlasangiz yuboradi va oxirida nechta odamga yetganini aytadi.
 - `/stat` — statistika: start bosganlar, arizalar, sinflar va manbalar bo'yicha.
 - `/sync` — jadvalga darhol yozish.
+- `/restore_users` — Google Sheets'dagi `Telegram ID` ustunidan foydalanuvchilarni bot bazasiga tiklash. Tiklagandan keyin hammaga xabar yuborish uchun `/post`da “Hammaga (start bosganlar)”ni tanlang. Bu buyruq faqat ID'larni tiklaydi; “ro'yxatdan o'tganlar” auditoriyasi uchun ariza ma'lumotlari bot bazasida ham bo'lishi kerak.
 
 > Albom (bir nechta rasm birga) yuborib bo'lmaydi — bitta rasm yoki video izohi bilan yuboring.
 
@@ -67,6 +68,11 @@ Bot birinchi arizada "Arizalar" varag'ini va sarlavhalarni o'zi yaratadi.
 - **Value:** `credentials.json` faylining to'liq JSON mazmuni
 
 Saqlang va Railway'da o'zgarishlarni deploy qiling. Bu variable berilgan bo'lsa, u `GOOGLE_CREDENTIALS_FILE` fayl yo'lidan ustun turadi. Google service account emailiga jadvalda **Editor** ruxsati berilgan bo'lishi, `GOOGLE_SHEET_ID` esa to'g'ri bo'lishi kerak.
+
+### Railway'da bot bazasini saqlash va tiklash
+Railway'da bot service'ga **Volume** ulang va mount path'ni `/data` qilib belgilang. Variables'ga `DB_PATH=/data/bot.db` qo'shing, so'ng deploy qiling. Bu botning SQLite bazasini qayta deploylarda saqlaydi.
+
+Bot ishga tushgach, admin sifatida `/restore_users` yuboring. Buyruq Google Sheets'dagi noyob Telegram ID'larni import qiladi va nechta oluvchiga xabar yuborish mumkinligini ko'rsatadi. Keyin `/post` → “Hammaga (start bosganlar)” orqali tarqating. Google service account jadvalga kirish huquqiga ega ekanini tekshiring.
 
 ### 3. Server (Ubuntu VPS, eng arzon tarif yetadi: 1 CPU, 1 GB RAM)
 ```bash

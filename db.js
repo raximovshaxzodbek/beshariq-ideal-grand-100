@@ -50,6 +50,31 @@ export function addUser(userId, username, fullName, source) {
   ).run(userId, username ?? null, fullName, source ?? null, config.nowLocal());
 }
 
+export function restoreUsers(users) {
+  const insert = db.prepare(
+    `INSERT INTO users (user_id, username, full_name, source, started_at)
+     VALUES (?, ?, ?, NULL, ?)
+     ON CONFLICT(user_id) DO UPDATE SET
+       username = COALESCE(excluded.username, users.username),
+       full_name = COALESCE(excluded.full_name, users.full_name),
+       blocked = 0`
+  );
+  let added = 0;
+  db.exec("BEGIN");
+  try {
+    for (const user of users) {
+      const existed = db.prepare("SELECT 1 FROM users WHERE user_id = ?").get(user.userId);
+      insert.run(user.userId, user.username ?? null, user.fullName ?? null, config.nowLocal());
+      if (!existed) added++;
+    }
+    db.exec("COMMIT");
+  } catch (e) {
+    db.exec("ROLLBACK");
+    throw e;
+  }
+  return { added, alreadyPresent: users.length - added };
+}
+
 export function setBlocked(userId) {
   db.prepare("UPDATE users SET blocked = 1 WHERE user_id = ?").run(userId);
 }
