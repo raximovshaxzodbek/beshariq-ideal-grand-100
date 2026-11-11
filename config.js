@@ -32,8 +32,8 @@ export const DB_PATH = process.env.DB_PATH || "bot.db";
 export const TZ_OFFSET_HOURS = Number(process.env.TZ_OFFSET_HOURS || 5);
 
 // Kampaniya sanalari (YYYY-MM-DD)
-export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-29";
-export const TEST_DATE = process.env.TEST_DATE || "2026-11-28";
+export const REGISTRATION_DEADLINE = process.env.REGISTRATION_DEADLINE || "2026-11-28";
+export const TEST_DATE = process.env.TEST_DATE || "2026-11-29";
 
 // Sinflar bo'yicha test vaqti
 export function testTimeForGrade(grade) {
