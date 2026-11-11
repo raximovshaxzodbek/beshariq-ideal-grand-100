@@ -9,18 +9,18 @@ Beshariq Ideal School grant testi uchun Telegram bot. Node.js 22.13 yoki undan y
 - Bitta ota-ona bir nechta farzandini yozishi mumkin (ismi va telefoni qayta so'ralmaydi).
 - Har bir farzandga sinfiga qarab test vaqtini aytadi: 1–4-sinf 09:00, 5–7-sinf 11:30, 8–10-sinf 14:00.
 - Menyu: Grant haqida, Manzil, Aloqa, Mening arizalarim.
-- 29-noyabrdan keyin ro'yxat avtomatik yopiladi.
+- Ro'yxatdan o'tish 28-noyabr kuni yakunlanadi.
 
 **Arizalar** Google Sheets jadvaliga tushadi. Internet yoki Google uzilib qolsa, ariza botning o'z bazasida saqlanadi va har daqiqada qayta yuboriladi — hech biri yo'qolmaydi. Jadvalda "Holat" va "Izoh" ustunlari bor: qabul bo'limi qo'ng'iroq natijasini shu yerga yozadi.
 
 **Avtomatik eslatmalar**
 | Qachon | Kimga |
 | --- | --- |
-| 26-noyabr 10:00 — "3 kun qoldi" | Start bosib, ro'yxatdan o'tmaganlar |
-| 28-noyabr 10:00 — "Ertaga yopiladi" | Ro'yxatdan o'tmaganlar |
-| 29-noyabr 09:00 — "Bugun oxirgi kun" | Ro'yxatdan o'tmaganlar |
-| 27-noyabr 18:00 — "Ertaga test" + vaqti | Ro'yxatdan o'tganlar |
-| 28-noyabr 07:00 — "Bugun test" | Ro'yxatdan o'tganlar |
+| 25-noyabr 10:00 — "3 kun qoldi" | Start bosib, ro'yxatdan o'tmaganlar |
+| 27-noyabr 10:00 — "Ertaga yopiladi" | Ro'yxatdan o'tmaganlar |
+| 28-noyabr 09:00 — "Bugun oxirgi kun" | Ro'yxatdan o'tmaganlar |
+| 28-noyabr 18:00 — "Ertaga test" + vaqti | Ro'yxatdan o'tganlar |
+| 29-noyabr 07:00 — "Bugun test" | Ro'yxatdan o'tganlar |
 
 Har bir eslatma bir kishiga faqat bir marta boradi, bot qayta ishga tushsa ham.
 
