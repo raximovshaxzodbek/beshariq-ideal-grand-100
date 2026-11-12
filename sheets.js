@@ -44,13 +44,23 @@ async function getSheet() {
   return sheet;
 }
 
-export function toRow(r) {
+export function toRow(r, serialNumber = r.id) {
   return [
-    r.id, r.created_at, r.parent_name, r.phone, r.child_name, `${r.grade}-sinf`,
+    serialNumber, r.created_at, r.parent_name, r.phone, r.child_name, `${r.grade}-sinf`,
     r.direction || "", r.class_lang, r.dormitory, r.heard_from,
     `${config.TEST_DATE.split("-").reverse().join(".")} ${r.test_time}`,
     r.username ? `@${r.username}` : "", String(r.user_id), "Yangi", "", r.current_school,
   ];
+}
+
+export function nextSerialNumber(rows) {
+  const registrations = rows.filter((row) =>
+    ["Farzand ismi", "Telegram ID"].some((header) => {
+      const value = row.get(header);
+      return value !== undefined && value !== null && String(value).trim() !== "";
+    })
+  );
+  return registrations.length + 1;
 }
 
 export async function usersFromSheet() {
@@ -96,7 +106,11 @@ export async function syncPending() {
     const pending = db.unsyncedRegistrations();
     if (!pending.length) return 0;
     const ws = await getSheet();
-    await ws.addRows(pending.map(toRow), { raw: true });
+    const firstSerialNumber = nextSerialNumber(await ws.getRows());
+    await ws.addRows(
+      pending.map((registration, index) => toRow(registration, firstSerialNumber + index)),
+      { raw: true }
+    );
     db.markSynced(pending.map((r) => r.id));
     return pending.length;
   } catch (e) {

@@ -11,7 +11,7 @@ Beshariq Ideal School grant testi uchun Telegram bot. Node.js 22.13 yoki undan y
 - Menyu: Grant haqida, Manzil, Aloqa, Mening arizalarim.
 - Ro'yxatdan o'tish 28-noyabr kuni yakunlanadi.
 
-**Arizalar** Google Sheets jadvaliga tushadi. Internet yoki Google uzilib qolsa, ariza botning o'z bazasida saqlanadi va har daqiqada qayta yuboriladi — hech biri yo'qolmaydi. Jadvalda "Holat" va "Izoh" ustunlari bor: qabul bo'limi qo'ng'iroq natijasini shu yerga yozadi.
+**Arizalar** Google Sheets jadvaliga tushadi. Internet yoki Google uzilib qolsa, ariza botning o'z bazasida saqlanadi va har daqiqada qayta yuboriladi — hech biri yo'qolmaydi. Jadvaldagi "№" ariza yozuvlari soniga qarab ketma-ket beriladi; jadvaldagi avvalgi qatorlar avtomatik qayta raqamlanmaydi. Jadvalda "Holat" va "Izoh" ustunlari bor: qabul bo'limi qo'ng'iroq natijasini shu yerga yozadi.
 
 **Avtomatik eslatmalar**
 | Qachon | Kimga |
